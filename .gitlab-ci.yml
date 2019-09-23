@@ -1,6 +1,6 @@
 master:
     script:
-        - mvn source:jar deploy -U -B
+        - mvn clean source:jar deploy -U -B
     tags:
         - mvn
     only:
