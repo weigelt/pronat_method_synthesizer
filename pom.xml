@@ -10,8 +10,8 @@
 
     <parent>
         <groupId>edu.kit.ipd.parse</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.1.2</version>
+        <artifactId>parse</artifactId>
+        <version>0.0.4</version>
     </parent>
 
     <repositories>
@@ -76,12 +76,10 @@
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>ShallowNLP</artifactId>
-            <version>0.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>coref</artifactId>
-            <version>0.0.2</version>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
@@ -126,7 +124,6 @@
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>ontology_connection</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.xdrop</groupId>
