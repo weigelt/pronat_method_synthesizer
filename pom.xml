@@ -54,11 +54,6 @@
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>ShallowNLP</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>senna-wrapper</artifactId>
         </dependency>
         <dependency>
@@ -80,11 +75,6 @@
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>coref</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>graphBuilder</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
@@ -121,28 +111,24 @@
             <artifactId>ontology_connection</artifactId>
         </dependency>
         <dependency>
-            <groupId>me.xdrop</groupId>
-            <artifactId>fuzzywuzzy</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
             <version>9.4.9.v20180320</version>
-        </dependency>  <dependency>
-        <groupId>com.google.cloud.dataflow</groupId>
-        <artifactId>google-cloud-dataflow-java-sdk-all</artifactId>
-        <version>2.2.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.tensorflow</groupId>
-        <artifactId>tensorflow</artifactId>
-        <version>1.12.0</version>
-    </dependency>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud.dataflow</groupId>
+            <artifactId>google-cloud-dataflow-java-sdk-all</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tensorflow</groupId>
+            <artifactId>tensorflow</artifactId>
+            <version>1.12.0</version>
+        </dependency>
         <!--<dependency>-->
-            <!--<groupId>edu.kit.ipd.parse</groupId>-->
-            <!--<artifactId>ontology_connection</artifactId>-->
-            <!--<scope>test</scope>-->
+        <!--<groupId>edu.kit.ipd.parse</groupId>-->
+        <!--<artifactId>ontology_connection</artifactId>-->
+        <!--<scope>test</scope>-->
         <!--</dependency>-->
 
     </dependencies>
