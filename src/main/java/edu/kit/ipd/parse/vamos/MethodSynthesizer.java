@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
 /**
  * @author Vanessa Steurer
  *
@@ -37,14 +36,14 @@ public class MethodSynthesizer extends AbstractAgent {
 
 	private static final String ID = "commandFinder";
 	private static final Logger logger = LoggerFactory.getLogger(MethodSynthesizer.class);
-	private static final Properties props =  ConfigManager.getConfiguration(MethodSynthesizer.class);
+	private static final Properties props = ConfigManager.getConfiguration(MethodSynthesizer.class);
 
-	private static final String IS_TEACHING_SEQUENCE = "isTeachingSequence";		// part1 (classification agent)
+	private static final String IS_TEACHING_SEQUENCE = "isTeachingSequence"; // part1 (classification agent)
 	private static final String IS_TEACHING_SEQUENCE_PROB = "isTeachingSequenceProbability";
 	private static final String TEACHING_SEQUENCE_PART = "teachingSequencePart";
 
 	// to represent command nodes
-	private static final String NODE_TYPE_COMMAND_MAPPER = "commandMapper";						// part3 (mapping agent)
+	private static final String NODE_TYPE_COMMAND_MAPPER = "commandMapper"; // part3 (mapping agent)
 	private static final String ATTRIBUTE_NAME_TEACHING_SEQUENCE = "isTeachingSequence";
 
 	// to represent decl / desc nodes
@@ -68,13 +67,25 @@ public class MethodSynthesizer extends AbstractAgent {
 
 	private static final String ARC_TYPE_COMMAND_MAPPER = "commandMapper";
 
+	private static final String PROP_TO_BE_VERB_MODIFIER = "TO_BE_VERB_MODIFIER";
+	private static final String PROP_USE_PERMUTATIONS = "USE_PERMUTATIONS";
+	private static final String PROP_MATCH_UNLEMMATIZED = "MATCH_UNLEMMATIZED";
+	private static final String PROP_CONSIDER_COVERAGE = "CONSIDER_COVERAGE";
+	private static final String PROP_COVERAGE_MULTIPLIER = "COVERAGE_MULTIPLIER";
 
-    private List<INode> utteranceNodes;
+	private List<INode> utteranceNodes;
 	private BinaryNeuralClassifier binClf;
 	private MulticlassNeuralClassifier mclassClf;
 	private boolean useContext = true;
 
-    /*
+	private boolean useToBeVerbModifier = false;
+	private boolean usePermutations = false;
+	private boolean alsoMatchUnlemmatized = false;
+	private boolean considerCoverage = false;
+
+	private double coverageMultiplier;
+
+	/*
 	 * (non-Javadoc)
 	 *
 	 * @see edu.kit.ipd.parse.luna.agent.LunaObserver#init()
@@ -96,6 +107,11 @@ public class MethodSynthesizer extends AbstractAgent {
 
 		binClf = new BinaryNeuralClassifier(props);
 		mclassClf = new MulticlassNeuralClassifier(props);
+		useToBeVerbModifier = Boolean.parseBoolean(props.getProperty(PROP_TO_BE_VERB_MODIFIER));
+		usePermutations = Boolean.parseBoolean(props.getProperty(PROP_USE_PERMUTATIONS));
+		alsoMatchUnlemmatized = Boolean.parseBoolean(props.getProperty(PROP_MATCH_UNLEMMATIZED));
+		considerCoverage = Boolean.parseBoolean(props.getProperty(PROP_CONSIDER_COVERAGE));
+		coverageMultiplier = Double.parseDouble(props.getProperty(PROP_COVERAGE_MULTIPLIER));
 	}
 
 	/*
@@ -123,13 +139,13 @@ public class MethodSynthesizer extends AbstractAgent {
 
 		String utterance = GraphUtils.getUtteranceString(utteranceNodes);
 		System.out.println(" ");
-        logger.info("input sentence: {}", utterance);
+		logger.info("input sentence: {}", utterance);
 
 		// binary classification: TeachingSequence yes/no
 		float[] binaryPrediction = getBinaryClfIsTeachingSequenceResult(utterance);
 		boolean isTeachingSequence = binClf.isTeachingSequence(binaryPrediction);
 
-        // mclass classification: methodbody/methodhead
+		// mclass classification: methodbody/methodhead
 		List<MulticlassLabels> mclassLabels = getMclassClfTeachingSequencePartsResult(utterance);
 
 		saveToGraph(isTeachingSequence, binaryPrediction, mclassLabels);
@@ -137,61 +153,62 @@ public class MethodSynthesizer extends AbstractAgent {
 		long declarationLabels = mclassLabels.stream().filter(l -> l.equals(MulticlassLabels.DECL)).count();
 		if (!isTeachingSequence && ((binaryPrediction[0] > 0.1f && declarationLabels > 2) || declarationLabels > 5)) {
 			isTeachingSequence = true;
-			logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier " +
-					"contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
+			logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier "
+					+ "contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
 		}
 
 		// merge classification results with semantic role labels: methodname, params
-		SrlExtractor srl = new SrlExtractor();
-        AbstractCommand command = mergeClfResults(srl, isTeachingSequence, mclassLabels);
+		SrlExtractor srl = new SrlExtractor(useToBeVerbModifier);
+		AbstractCommand command = mergeClfResults(srl, isTeachingSequence, mclassLabels);
 
-		OntologyMapper mapper = new OntologyMapper(useContext);
+		OntologyMapper mapper = new OntologyMapper(useContext, usePermutations, alsoMatchUnlemmatized, considerCoverage,
+				coverageMultiplier);
 		CommandCandidate commandMappingToAPI = mapper.findCommandMappingToAPI(command);
 		logger.debug("Mapped command: \n{}", commandMappingToAPI.toString());
 
 		saveToGraph(commandMappingToAPI);
 	}
 
-
 	private float[] getBinaryClfIsTeachingSequenceResult(String utterance) {
-        INDArray binResult = binClf.getSinglePrediction(utterance, binClf.getModel());
+		INDArray binResult = binClf.getSinglePrediction(utterance, binClf.getModel());
 		float[] predictedClasses = binClf.getPredictedClasses(binResult, 0);
 
 		logger.info("Found teaching sequence prediction: {}.", predictedClasses);
-        return predictedClasses;
-    }
+		return predictedClasses;
+	}
 
-    protected List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(String utterance) {
-        List<MulticlassLabels> mclassLabels;
+	protected List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(String utterance) {
+		List<MulticlassLabels> mclassLabels;
 		boolean useInternalModel = Boolean.valueOf(props.getProperty("USE_INTERAL_MCLASS_MODEL"));
 		logger.info("Read in configuration for USE_INTERAL_MCLASS_MODEL:{}.", useInternalModel);
 
 		if (useInternalModel) { // load model from dl4j
-            INDArray mclassPrediction = mclassClf.getSinglePrediction(utterance, mclassClf.getModel());
-            mclassLabels = mclassClf.getInterpretedPredictedLabels(mclassPrediction, utteranceNodes.size());
-
-        } else {  // use keras external MclassModel by calling python script
-			INDArray mclassPrediction = mclassClf.getExternalMclassModelSinglePrediction(mclassClf.tokenizeSingleInput(utterance), utteranceNodes.size());
+			INDArray mclassPrediction = mclassClf.getSinglePrediction(utterance, mclassClf.getModel());
 			mclassLabels = mclassClf.getInterpretedPredictedLabels(mclassPrediction, utteranceNodes.size());
-        }
 
-        logger.info("Found different parts of teaching sequence with multiclass clf.");
-        return mclassLabels;
-    }
+		} else { // use keras external MclassModel by calling python script
+			INDArray mclassPrediction = mclassClf.getExternalMclassModelSinglePrediction(mclassClf.tokenizeSingleInput(utterance),
+					utteranceNodes.size());
+			mclassLabels = mclassClf.getInterpretedPredictedLabels(mclassPrediction, utteranceNodes.size());
+		}
 
-    private AbstractCommand mergeClfResults(SrlExtractor srl, boolean isTeachingSequence, List<MulticlassLabels> mclassLabels) {
-        CommandBuilder tsBuilder = new CommandBuilder(srl, utteranceNodes, mclassLabels);
+		logger.info("Found different parts of teaching sequence with multiclass clf.");
+		return mclassLabels;
+	}
 
-        AbstractCommand command;
-        if (isTeachingSequence) {
-            command = tsBuilder.buildTeachingCommand();
-        } else {
-            command = tsBuilder.buildExecutionCommand();
-        }
+	private AbstractCommand mergeClfResults(SrlExtractor srl, boolean isTeachingSequence, List<MulticlassLabels> mclassLabels) {
+		CommandBuilder tsBuilder = new CommandBuilder(srl, utteranceNodes, mclassLabels);
 
-        logger.debug(command.toString());
-        return command;
-    }
+		AbstractCommand command;
+		if (isTeachingSequence) {
+			command = tsBuilder.buildTeachingCommand();
+		} else {
+			command = tsBuilder.buildExecutionCommand();
+		}
+
+		logger.debug(command.toString());
+		return command;
+	}
 
 	private void saveToGraph(boolean binaryIsTeachingSequence, float[] isTeachingSequenceProbability, List<MulticlassLabels> mclassLabels) {
 		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE, "String")) {
@@ -227,10 +244,14 @@ public class MethodSynthesizer extends AbstractAgent {
 		}
 
 		INodeType commandDeclarationType = graph.getNodeType(NODE_TYPE_COMMAND_DECL);
-		if (commandDeclarationType == null) commandDeclarationType = graph.createNodeType(NODE_TYPE_COMMAND_DECL);
+		if (commandDeclarationType == null) {
+			commandDeclarationType = graph.createNodeType(NODE_TYPE_COMMAND_DECL);
+		}
 
 		INodeType commandDescriptionType = graph.getNodeType(NODE_TYPE_COMMAND_DESC);
-		if (commandDescriptionType == null) commandDescriptionType = graph.createNodeType(NODE_TYPE_COMMAND_DESC);
+		if (commandDescriptionType == null) {
+			commandDescriptionType = graph.createNodeType(NODE_TYPE_COMMAND_DESC);
+		}
 
 		INodeType functionCallType = graph.getNodeType(NODE_TYPE_FUNCTION_CALL);
 		if (functionCallType == null) {
@@ -254,7 +275,9 @@ public class MethodSynthesizer extends AbstractAgent {
 		}
 
 		IArcType commandMapperArcType = graph.getArcType(ARC_TYPE_COMMAND_MAPPER);
-		if (commandMapperArcType == null) commandMapperArcType = graph.createArcType(ARC_TYPE_COMMAND_MAPPER);
+		if (commandMapperArcType == null) {
+			commandMapperArcType = graph.createArcType(ARC_TYPE_COMMAND_MAPPER);
+		}
 
 		INode commandMapperNode = graph.createNode(commandMapperType);
 		commandMapperNode.setAttributeValue(ATTRIBUTE_NAME_TEACHING_SEQUENCE, isTeachingSequence);
@@ -280,13 +303,14 @@ public class MethodSynthesizer extends AbstractAgent {
 			graph.createArc(functionCallNode, functionNameNode, commandMapperArcType); // arc to parent node FunctionCall
 
 			for (Object tokenNode : methodSignature.getInstruction().getInstructionNameNodes()) {
-				graph.createArc(functionNameNode, (INode) tokenNode, commandMapperArcType);	// arc to token node
+				graph.createArc(functionNameNode, (INode) tokenNode, commandMapperArcType); // arc to token node
 			}
 
 			for (FunctionParameterCandidate param : methodSignature.getParameters()) {
 				INode functionParamNode = graph.createNode(functionParameterType);
-				functionParamNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_PARAMETER,  param.isPrimitiveType() ?
-						param.getExtractedParameter().getParameterName() : param.getParameterCandidate().getFullName());
+				functionParamNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_PARAMETER,
+						param.isPrimitiveType() ? param.getExtractedParameter().getParameterName()
+								: param.getParameterCandidate().getFullName());
 				graph.createArc(functionNameNode, functionParamNode, commandMapperArcType); // arc to parent node FunctionName
 
 				for (INode tokenNode : param.getExtractedParameter().getClearedParameterNodes()) {
@@ -296,7 +320,7 @@ public class MethodSynthesizer extends AbstractAgent {
 		}
 
 		// create DESCRIPTION INSTRUCTION (method body / script) NODES
-		for (int i = 0; i < functionCallCandidates.size(); i++) {	// number of candidates
+		for (int i = 0; i < functionCallCandidates.size(); i++) { // number of candidates
 			INode functionCallNode = graph.createNode(functionCallType);
 			functionCallNode.setAttributeValue(ATTRIBUTE_CALL_NUMBER, i + 1);
 			graph.createArc(commandDescNode, functionCallNode, commandMapperArcType); // arc to parent node Desc
@@ -306,20 +330,23 @@ public class MethodSynthesizer extends AbstractAgent {
 				FunctionCallCandidate candidate = topNCandidates.get(j);
 
 				INode functionNameNode = graph.createNode(functionNameType);
-				functionNameNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_FUNCTION, candidate.getNameCandidate().getMethodCandidate().getFullName());
+				functionNameNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_FUNCTION,
+						candidate.getNameCandidate().getMethodCandidate().getFullName());
 				functionNameNode.setAttributeValue(ATTRIBUTE_TOPN_CANDIDATE, j + 1);
 				functionNameNode.setAttributeValue(ATTRIBUTE_TOPN_CANDIDATE_SCORE, candidate.getFunctionCallScore());
 				graph.createArc(functionCallNode, functionNameNode, commandMapperArcType); // arc to parent node FunctionCall
 
 				for (INode tokenNode : candidate.getNameCandidate().getExtractedInstruction().getClearedInstructionNameNodes()) {
-					graph.createArc(functionNameNode, tokenNode, commandMapperArcType);	// arc to token node
+					graph.createArc(functionNameNode, tokenNode, commandMapperArcType); // arc to token node
 				}
 
 				for (FunctionParameterCandidate param : candidate.getParameterCandidates()) {
 					INode functionParamNode = graph.createNode(functionParameterType);
-					functionParamNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_PARAMETER, param.isPrimitiveType() ?
-								param.getExtractedParameter().getParameterName() : param.getParameterCandidate().getFullName());
-					if (candidate.getMatchingOntologyParametersMap() != null && candidate.getMatchingOntologyParametersMap().get(param) != null) {
+					functionParamNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_PARAMETER,
+							param.isPrimitiveType() ? param.getExtractedParameter().getParameterName()
+									: param.getParameterCandidate().getFullName());
+					if (candidate.getMatchingOntologyParametersMap() != null
+							&& candidate.getMatchingOntologyParametersMap().get(param) != null) {
 						functionParamNode.setAttributeValue(ATTRIBUTE_ONTOLOGY_METHOD_PARAMETER_TO_MAP,
 								candidate.getMatchingOntologyParametersMap().get(param).getFullName());
 					}
