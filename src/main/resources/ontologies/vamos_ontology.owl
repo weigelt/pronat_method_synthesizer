@@ -41,9 +41,6 @@
         <Class IRI="#Parameter"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Pourable"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Pressable"/>
     </Declaration>
     <Declaration>
@@ -116,16 +113,10 @@
         <NamedIndividual IRI="#Blue"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#Bowl"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="#Brown"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#CerealBox"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#Cereals"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#Character"/>
@@ -266,6 +257,9 @@
         <NamedIndividual IRI="#Lunch"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Me"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#Medium"/>
     </Declaration>
     <Declaration>
@@ -315,9 +309,6 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#Popcorn"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#Pourable"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#Pressable"/>
@@ -395,6 +386,9 @@
         <NamedIndividual IRI="#White"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Window"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#Yellow"/>
     </Declaration>
     <Declaration>
@@ -422,13 +416,10 @@
         <NamedIndividual IRI="#bring2.where"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#carry"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#carry.what"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#carry1"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#carry2"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#char"/>
@@ -473,7 +464,16 @@
         <NamedIndividual IRI="#cold"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#collect"/>
+        <NamedIndividual IRI="#collect1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#collect2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#come"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#come.where"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#dance"/>
@@ -497,10 +497,19 @@
         <NamedIndividual IRI="#false"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#fetch"/>
+        <NamedIndividual IRI="#fetch1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#fetch2"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#fill"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#fill.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#fill.where"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#find1"/>
@@ -515,10 +524,19 @@
         <NamedIndividual IRI="#full"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#get"/>
+        <NamedIndividual IRI="#get1"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#get.what"/>
+        <NamedIndividual IRI="#get1.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#get2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#get2.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#get2.where"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#give1"/>
@@ -561,6 +579,42 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#int"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isClean"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isClean.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isClosed"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isClosed.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isDirty"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isDirty.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isEmpty"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isEmpty.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isFull"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isFull.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isOpened"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#isOpened.what"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#leave"/>
@@ -656,7 +710,10 @@
         <NamedIndividual IRI="#opened"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#pickUp"/>
+        <NamedIndividual IRI="#pickUp1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#pickUp2"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#pour"/>
@@ -704,6 +761,21 @@
         <NamedIndividual IRI="#release.what"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#remove1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#remove1.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#remove2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#remove2.what"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#remove2.where"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#retrieve1"/>
     </Declaration>
     <Declaration>
@@ -729,6 +801,12 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#search2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#see"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#see.what"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#short"/>
@@ -759,6 +837,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#take"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#take.what"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#takeOut1"/>
@@ -851,13 +932,13 @@
         <Class IRI="#Object"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Pourable"/>
-        <Class IRI="#Object"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#Pressable"/>
         <Class IRI="#Object"/>
     </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Closeable"/>
+        <NamedIndividual IRI="#Apollinaris"/>
+    </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Grabable"/>
         <NamedIndividual IRI="#Apollinaris"/>
@@ -868,6 +949,10 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
+        <NamedIndividual IRI="#Apollinaris"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Openable"/>
         <NamedIndividual IRI="#Apollinaris"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -904,10 +989,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#AppleJuice"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
         <NamedIndividual IRI="#AppleJuice"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -951,10 +1032,6 @@
         <NamedIndividual IRI="#Beverage"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Beverage"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Beverage"/>
     </ClassAssertion>
@@ -967,30 +1044,10 @@
         <NamedIndividual IRI="#Blue"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Grabable"/>
-        <NamedIndividual IRI="#Bowl"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Locateable"/>
-        <NamedIndividual IRI="#Bowl"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Object"/>
-        <NamedIndividual IRI="#Bowl"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Value"/>
-        <NamedIndividual IRI="#Bowl"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Brown"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Closeable"/>
-        <NamedIndividual IRI="#CerealBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Grabable"/>
         <NamedIndividual IRI="#CerealBox"/>
     </ClassAssertion>
@@ -1003,28 +1060,8 @@
         <NamedIndividual IRI="#CerealBox"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Openable"/>
-        <NamedIndividual IRI="#CerealBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#CerealBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Locateable"/>
-        <NamedIndividual IRI="#Cereals"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Object"/>
-        <NamedIndividual IRI="#Cereals"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Cereals"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Value"/>
-        <NamedIndividual IRI="#Cereals"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Value"/>
@@ -1035,10 +1072,6 @@
         <NamedIndividual IRI="#Closeable"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Closeable"/>
-        <NamedIndividual IRI="#CocoaBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Grabable"/>
         <NamedIndividual IRI="#CocoaBox"/>
     </ClassAssertion>
@@ -1048,10 +1081,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#CocoaBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Openable"/>
         <NamedIndividual IRI="#CocoaBox"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1072,10 +1101,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#Coffee"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
         <NamedIndividual IRI="#Coffee"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1151,10 +1176,6 @@
         <NamedIndividual IRI="#Cooker"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Closeable"/>
-        <NamedIndividual IRI="#CookieBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Grabable"/>
         <NamedIndividual IRI="#CookieBox"/>
     </ClassAssertion>
@@ -1164,10 +1185,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#CookieBox"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Openable"/>
         <NamedIndividual IRI="#CookieBox"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1307,15 +1324,15 @@
         <NamedIndividual IRI="#Drink"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Drink"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Drink"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#DataType"/>
+        <NamedIndividual IRI="#Drinkable"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Locateable"/>
         <NamedIndividual IRI="#Drinkable"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1531,10 +1548,6 @@
         <NamedIndividual IRI="#Liquid"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Liquid"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Liquid"/>
     </ClassAssertion>
@@ -1553,6 +1566,10 @@
     <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Lunch"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Object"/>
+        <NamedIndividual IRI="#Me"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Value"/>
@@ -1615,10 +1632,6 @@
         <NamedIndividual IRI="#Microwave.OnButton"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Closeable"/>
-        <NamedIndividual IRI="#Milk"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Drinkable"/>
         <NamedIndividual IRI="#Milk"/>
     </ClassAssertion>
@@ -1635,20 +1648,8 @@
         <NamedIndividual IRI="#Milk"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Openable"/>
-        <NamedIndividual IRI="#Milk"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Milk"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Milk"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Drinkable"/>
-        <NamedIndividual IRI="#MultivitaminJuice"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Grabable"/>
@@ -1660,10 +1661,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#MultivitaminJuice"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
         <NamedIndividual IRI="#MultivitaminJuice"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1680,10 +1677,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#Nesquik"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
         <NamedIndividual IRI="#Nesquik"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1728,10 +1721,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#OrangeJuice"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
         <NamedIndividual IRI="#OrangeJuice"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -1795,16 +1784,8 @@
         <NamedIndividual IRI="#Popcorn"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Popcorn"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Popcorn"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#DataType"/>
-        <NamedIndividual IRI="#Pourable"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#DataType"/>
@@ -1943,10 +1924,6 @@
         <NamedIndividual IRI="#Tea"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Pourable"/>
-        <NamedIndividual IRI="#Tea"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#Tea"/>
     </ClassAssertion>
@@ -1985,10 +1962,6 @@
     <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#User"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Closeable"/>
-        <NamedIndividual IRI="#VodkaBottle"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Grabable"/>
@@ -2000,10 +1973,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#VodkaBottle"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Openable"/>
         <NamedIndividual IRI="#VodkaBottle"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -2020,10 +1989,6 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Object"/>
-        <NamedIndividual IRI="#Water"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Pourable"/>
         <NamedIndividual IRI="#Water"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -2057,6 +2022,26 @@
     <ClassAssertion>
         <Class IRI="#Value"/>
         <NamedIndividual IRI="#White"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Closeable"/>
+        <NamedIndividual IRI="#Window"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Locateable"/>
+        <NamedIndividual IRI="#Window"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Object"/>
+        <NamedIndividual IRI="#Window"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Openable"/>
+        <NamedIndividual IRI="#Window"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Value"/>
+        <NamedIndividual IRI="#Window"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Value"/>
@@ -2095,16 +2080,12 @@
         <NamedIndividual IRI="#bring2.where"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#carry"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Parameter"/>
         <NamedIndividual IRI="#carry.what"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Method"/>
-        <NamedIndividual IRI="#carry1"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Method"/>
-        <NamedIndividual IRI="#carry2"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#DataType"/>
@@ -2168,7 +2149,19 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
-        <NamedIndividual IRI="#collect"/>
+        <NamedIndividual IRI="#collect1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#collect2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#come"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#come.where"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
@@ -2204,11 +2197,23 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
-        <NamedIndividual IRI="#fetch"/>
+        <NamedIndividual IRI="#fetch1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#fetch2"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
         <NamedIndividual IRI="#fill"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#fill.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#fill.where"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
@@ -2228,11 +2233,23 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
-        <NamedIndividual IRI="#get"/>
+        <NamedIndividual IRI="#get1"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Parameter"/>
-        <NamedIndividual IRI="#get.what"/>
+        <NamedIndividual IRI="#get1.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#get2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#get2.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#get2.where"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
@@ -2289,6 +2306,54 @@
     <ClassAssertion>
         <Class IRI="#DataType"/>
         <NamedIndividual IRI="#int"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#isClean"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#isClean.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#isClosed"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#isClosed.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#isDirty"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#isDirty.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#isEmpty"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#isEmpty.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#isFull"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#isFull.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#isOpened"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#isOpened.what"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
@@ -2416,7 +2481,11 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
-        <NamedIndividual IRI="#pickUp"/>
+        <NamedIndividual IRI="#pickUp1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#pickUp2"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
@@ -2480,6 +2549,26 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
+        <NamedIndividual IRI="#remove1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#remove1.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#remove2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#remove2.what"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#remove2.where"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
         <NamedIndividual IRI="#retrieve1"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -2513,6 +2602,14 @@
     <ClassAssertion>
         <Class IRI="#Method"/>
         <NamedIndividual IRI="#search2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Method"/>
+        <NamedIndividual IRI="#see"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#see.what"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#DataType"/>
@@ -2553,6 +2650,10 @@
     <ClassAssertion>
         <Class IRI="#Method"/>
         <NamedIndividual IRI="#take"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Parameter"/>
+        <NamedIndividual IRI="#take.what"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Method"/>
@@ -2655,6 +2756,10 @@
         <NamedIndividual IRI="#Stove"/>
     </SameIndividual>
     <SameIndividual>
+        <NamedIndividual IRI="#Me"/>
+        <NamedIndividual IRI="#Speaker"/>
+    </SameIndividual>
+    <SameIndividual>
         <NamedIndividual IRI="#Person"/>
         <NamedIndividual IRI="#Speaker"/>
     </SameIndividual>
@@ -2676,22 +2781,14 @@
     </SameIndividual>
     <SameIndividual>
         <NamedIndividual IRI="#bring1"/>
-        <NamedIndividual IRI="#carry1"/>
-    </SameIndividual>
-    <SameIndividual>
-        <NamedIndividual IRI="#bring1"/>
         <NamedIndividual IRI="#deliver1"/>
-    </SameIndividual>
-    <SameIndividual>
-        <NamedIndividual IRI="#bring2"/>
-        <NamedIndividual IRI="#carry2"/>
     </SameIndividual>
     <SameIndividual>
         <NamedIndividual IRI="#bring2"/>
         <NamedIndividual IRI="#deliver2"/>
     </SameIndividual>
     <SameIndividual>
-        <NamedIndividual IRI="#carry1"/>
+        <NamedIndividual IRI="#carry"/>
         <NamedIndividual IRI="#hold"/>
     </SameIndividual>
     <SameIndividual>
@@ -2699,16 +2796,20 @@
         <NamedIndividual IRI="#wash"/>
     </SameIndividual>
     <SameIndividual>
-        <NamedIndividual IRI="#collect"/>
-        <NamedIndividual IRI="#get"/>
+        <NamedIndividual IRI="#collect1"/>
+        <NamedIndividual IRI="#get1"/>
     </SameIndividual>
     <SameIndividual>
-        <NamedIndividual IRI="#fetch"/>
-        <NamedIndividual IRI="#get"/>
+        <NamedIndividual IRI="#collect2"/>
+        <NamedIndividual IRI="#get2"/>
     </SameIndividual>
     <SameIndividual>
-        <NamedIndividual IRI="#fill"/>
-        <NamedIndividual IRI="#pour"/>
+        <NamedIndividual IRI="#fetch1"/>
+        <NamedIndividual IRI="#get1"/>
+    </SameIndividual>
+    <SameIndividual>
+        <NamedIndividual IRI="#fetch2"/>
+        <NamedIndividual IRI="#get2"/>
     </SameIndividual>
     <SameIndividual>
         <NamedIndividual IRI="#find1"/>
@@ -2719,8 +2820,12 @@
         <NamedIndividual IRI="#locate2"/>
     </SameIndividual>
     <SameIndividual>
-        <NamedIndividual IRI="#get"/>
-        <NamedIndividual IRI="#pickUp"/>
+        <NamedIndividual IRI="#get1"/>
+        <NamedIndividual IRI="#pickUp1"/>
+    </SameIndividual>
+    <SameIndividual>
+        <NamedIndividual IRI="#get2"/>
+        <NamedIndividual IRI="#pickUp2"/>
     </SameIndividual>
     <SameIndividual>
         <NamedIndividual IRI="#give1"/>
@@ -2745,6 +2850,10 @@
     <SameIndividual>
         <NamedIndividual IRI="#grab"/>
         <NamedIndividual IRI="#take"/>
+    </SameIndividual>
+    <SameIndividual>
+        <NamedIndividual IRI="#grab.what"/>
+        <NamedIndividual IRI="#take.what"/>
     </SameIndividual>
     <SameIndividual>
         <NamedIndividual IRI="#locate1"/>
@@ -2828,7 +2937,7 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasMethod"/>
         <NamedIndividual IRI="#Armar"/>
-        <NamedIndividual IRI="#get"/>
+        <NamedIndividual IRI="#get1"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasMethod"/>
@@ -2954,6 +3063,16 @@
         <ObjectProperty IRI="#subObject"/>
         <NamedIndividual IRI="#Cupboard"/>
         <NamedIndividual IRI="#Cupboard.Door"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMethod"/>
+        <NamedIndividual IRI="#Cupboard.Door"/>
+        <NamedIndividual IRI="#isClosed"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasMethod"/>
+        <NamedIndividual IRI="#Cupboard.Door"/>
+        <NamedIndividual IRI="#isOpened"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasState"/>
@@ -3232,11 +3351,6 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasValue"/>
-        <NamedIndividual IRI="#Pourable"/>
-        <NamedIndividual IRI="#Pourable"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasValue"/>
         <NamedIndividual IRI="#Pressable"/>
         <NamedIndividual IRI="#Pressable"/>
     </ObjectPropertyAssertion>
@@ -3331,6 +3445,16 @@
         <NamedIndividual IRI="#opened"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasState"/>
+        <NamedIndividual IRI="#Window"/>
+        <NamedIndividual IRI="#closed"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasState"/>
+        <NamedIndividual IRI="#Window"/>
+        <NamedIndividual IRI="#opened"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasParameter"/>
         <NamedIndividual IRI="#bring1"/>
         <NamedIndividual IRI="#bring1.what"/>
@@ -3359,6 +3483,11 @@
         <ObjectProperty IRI="#ofDataType"/>
         <NamedIndividual IRI="#bring2.where"/>
         <NamedIndividual IRI="#Locateable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#carry"/>
+        <NamedIndividual IRI="#carry.what"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#ofDataType"/>
@@ -3551,6 +3680,16 @@
         <NamedIndividual IRI="#warm"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#come"/>
+        <NamedIndividual IRI="#come.where"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#come.where"/>
+        <NamedIndividual IRI="#Locateable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#associatedObject"/>
         <NamedIndividual IRI="#dirty"/>
         <NamedIndividual IRI="#Cup"/>
@@ -3666,6 +3805,31 @@
         <NamedIndividual IRI="#true"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#changesStateTo"/>
+        <NamedIndividual IRI="#fill"/>
+        <NamedIndividual IRI="#full"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#fill"/>
+        <NamedIndividual IRI="#fill.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#fill"/>
+        <NamedIndividual IRI="#fill.where"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#fill.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#fill.where"/>
+        <NamedIndividual IRI="#Locateable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#associatedObject"/>
         <NamedIndividual IRI="#full"/>
         <NamedIndividual IRI="#Apollinaris"/>
@@ -3707,13 +3871,33 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasParameter"/>
-        <NamedIndividual IRI="#get"/>
-        <NamedIndividual IRI="#get.what"/>
+        <NamedIndividual IRI="#get1"/>
+        <NamedIndividual IRI="#get1.what"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#ofDataType"/>
-        <NamedIndividual IRI="#get.what"/>
-        <NamedIndividual IRI="#Object"/>
+        <NamedIndividual IRI="#get1.what"/>
+        <NamedIndividual IRI="#Grabable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#get2"/>
+        <NamedIndividual IRI="#get2.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#get2"/>
+        <NamedIndividual IRI="#get2.where"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#get2.what"/>
+        <NamedIndividual IRI="#Grabable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#get2.where"/>
+        <NamedIndividual IRI="#Locateable"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasParameter"/>
@@ -3759,6 +3943,66 @@
         <ObjectProperty IRI="#hasValue"/>
         <NamedIndividual IRI="#int"/>
         <NamedIndividual IRI="#Integer_Min_Max"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#isClean"/>
+        <NamedIndividual IRI="#isClean.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#isClean.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#isClosed"/>
+        <NamedIndividual IRI="#isClosed.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#isClosed.what"/>
+        <NamedIndividual IRI="#Closeable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#isDirty"/>
+        <NamedIndividual IRI="#isDirty.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#isDirty.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#isEmpty"/>
+        <NamedIndividual IRI="#isEmpty.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#isEmpty.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#isFull"/>
+        <NamedIndividual IRI="#isFull.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#isFull.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#isOpened"/>
+        <NamedIndividual IRI="#isOpened.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#isOpened.what"/>
+        <NamedIndividual IRI="#Openable"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasParameter"/>
@@ -3983,7 +4227,7 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#changesStateTo"/>
         <NamedIndividual IRI="#pour"/>
-        <NamedIndividual IRI="#full"/>
+        <NamedIndividual IRI="#empty"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasParameter"/>
@@ -3998,7 +4242,7 @@
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#ofDataType"/>
         <NamedIndividual IRI="#pour.what"/>
-        <NamedIndividual IRI="#Pourable"/>
+        <NamedIndividual IRI="#Drinkable"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#ofDataType"/>
@@ -4067,6 +4311,36 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#remove1"/>
+        <NamedIndividual IRI="#remove1.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#remove1.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#remove2"/>
+        <NamedIndividual IRI="#remove2.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#remove2"/>
+        <NamedIndividual IRI="#remove2.where"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#remove2.what"/>
+        <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#remove2.where"/>
+        <NamedIndividual IRI="#Locateable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
         <NamedIndividual IRI="#retrieve1"/>
         <NamedIndividual IRI="#retrieve1.what"/>
     </ObjectPropertyAssertion>
@@ -4106,6 +4380,16 @@
         <NamedIndividual IRI="#String"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#see"/>
+        <NamedIndividual IRI="#see.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#see.what"/>
+        <NamedIndividual IRI="#Locateable"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasValue"/>
         <NamedIndividual IRI="#short"/>
         <NamedIndividual IRI="#Short_MIn_Max"/>
@@ -4139,6 +4423,16 @@
         <ObjectProperty IRI="#ofDataType"/>
         <NamedIndividual IRI="#start.what"/>
         <NamedIndividual IRI="#Object"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasParameter"/>
+        <NamedIndividual IRI="#take"/>
+        <NamedIndividual IRI="#take.what"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ofDataType"/>
+        <NamedIndividual IRI="#take.what"/>
+        <NamedIndividual IRI="#Grabable"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#changesStateTo"/>
@@ -4241,7 +4535,10 @@
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasMethod"/>
-        <Class IRI="#System"/>
+        <ObjectUnionOf>
+            <Class IRI="#Object"/>
+            <Class IRI="#System"/>
+        </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasParameter"/>
