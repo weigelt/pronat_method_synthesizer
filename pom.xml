@@ -125,6 +125,10 @@
             <artifactId>tensorflow</artifactId>
             <version>1.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
         <!--<dependency>-->
         <!--<groupId>edu.kit.ipd.parse</groupId>-->
         <!--<artifactId>ontology_connection</artifactId>-->
