@@ -108,7 +108,7 @@
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
-	    <artifactId>ontology_connection</artifactId>
+            <artifactId>ontology_connection</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
