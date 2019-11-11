@@ -94,7 +94,7 @@ public class SrlExtractor {
 				break;
 			} else {
 				act = pred;
-				pred = GraphUtils.getPrevNode(node);
+				pred = GraphUtils.getPrevNode(act);
 			}
 		}
 		return extractedToBe;
