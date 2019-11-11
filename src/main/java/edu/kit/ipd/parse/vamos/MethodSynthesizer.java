@@ -72,6 +72,7 @@ public class MethodSynthesizer extends AbstractAgent {
 	private static final String PROP_MATCH_UNLEMMATIZED = "MATCH_UNLEMMATIZED";
 	private static final String PROP_CONSIDER_COVERAGE = "CONSIDER_COVERAGE";
 	private static final String PROP_COVERAGE_MULTIPLIER = "COVERAGE_MULTIPLIER";
+	private static final String PROP_NEW_CLASSIFIER_OVERRULING = "NEW_CLASSIFIER_OVERRULING";
 
 	private List<INode> utteranceNodes;
 	private BinaryNeuralClassifier binClf;
@@ -82,6 +83,7 @@ public class MethodSynthesizer extends AbstractAgent {
 	private boolean usePermutations = false;
 	private boolean alsoMatchUnlemmatized = false;
 	private boolean considerCoverage = false;
+	private boolean newOverruling = false;
 
 	private double coverageMultiplier;
 
@@ -112,6 +114,7 @@ public class MethodSynthesizer extends AbstractAgent {
 		alsoMatchUnlemmatized = Boolean.parseBoolean(props.getProperty(PROP_MATCH_UNLEMMATIZED));
 		considerCoverage = Boolean.parseBoolean(props.getProperty(PROP_CONSIDER_COVERAGE));
 		coverageMultiplier = Double.parseDouble(props.getProperty(PROP_COVERAGE_MULTIPLIER));
+		newOverruling = Boolean.parseBoolean(props.getProperty(PROP_NEW_CLASSIFIER_OVERRULING));
 	}
 
 	/*
@@ -151,10 +154,19 @@ public class MethodSynthesizer extends AbstractAgent {
 		saveToGraph(isTeachingSequence, binaryPrediction, mclassLabels);
 
 		long declarationLabels = mclassLabels.stream().filter(l -> l.equals(MulticlassLabels.DECL)).count();
-		if (!isTeachingSequence && ((binaryPrediction[0] > 0.1f && declarationLabels > 2) || declarationLabels > 5)) {
-			isTeachingSequence = true;
-			logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier "
-					+ "contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
+
+		if (newOverruling) {
+			if (!isTeachingSequence && ((binaryPrediction[0] > 0.1f && declarationLabels > 2) || declarationLabels > 5)) {
+				isTeachingSequence = true;
+				logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier "
+						+ "contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
+			}
+		} else {
+			if (!isTeachingSequence && ((binaryPrediction[0] > 0.1f) || (binaryPrediction[0] > 0.01f && declarationLabels > 0))) {
+				isTeachingSequence = true;
+				logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier "
+						+ "contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
+			}
 		}
 
 		// merge classification results with semantic role labels: methodname, params
