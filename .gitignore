@@ -79,3 +79,6 @@ _ReSharper.*
 *.iml
 *.eml
 /out/
+*error.txt
+*output.txt
+*_venv
