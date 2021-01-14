@@ -28,7 +28,7 @@ public class CommandBuilder {
      * count clf labels on SRL-chunks, get most frequent label per SRL-chunk
      * @return list with 1 clf label for each SRL-chunk
      */
-    private List<MulticlassLabels> mergeNeuralClfAndSrlResults(List<List<INode>> srlChunkList) {
+    public List<MulticlassLabels> mergeNeuralClfAndSrlResults(List<List<INode>> srlChunkList) {
         List<MulticlassLabels> labeledChunkList = new ArrayList<>();
 
         for (List<INode> srlChunk : srlChunkList) {

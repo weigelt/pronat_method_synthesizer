@@ -5,9 +5,8 @@ import edu.kit.ipd.parse.luna.data.MissingDataException;
 import edu.kit.ipd.parse.luna.graph.IArcType;
 import edu.kit.ipd.parse.luna.graph.INode;
 import edu.kit.ipd.parse.luna.graph.INodeType;
+import edu.kit.ipd.parse.luna.graph.ParseGraph;
 import edu.kit.ipd.parse.luna.tools.ConfigManager;
-import edu.kit.ipd.parse.vamos.command_classification.BinaryNeuralClassifier;
-import edu.kit.ipd.parse.vamos.command_classification.MulticlassNeuralClassifier;
 import edu.kit.ipd.parse.vamos.command_classification.SrlExtractor;
 import edu.kit.ipd.parse.vamos.command_representation.AbstractCommand;
 import edu.kit.ipd.parse.vamos.command_classification.MulticlassLabels;
@@ -27,6 +26,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * @author Sebastian Weigelt
  * @author Vanessa Steurer
  *
  */
@@ -67,25 +67,12 @@ public class MethodSynthesizer extends AbstractAgent {
 
 	private static final String ARC_TYPE_COMMAND_MAPPER = "commandMapper";
 
-	private static final String PROP_TO_BE_VERB_MODIFIER = "TO_BE_VERB_MODIFIER";
-	private static final String PROP_USE_PERMUTATIONS = "USE_PERMUTATIONS";
-	private static final String PROP_MATCH_UNLEMMATIZED = "MATCH_UNLEMMATIZED";
-	private static final String PROP_CONSIDER_COVERAGE = "CONSIDER_COVERAGE";
-	private static final String PROP_COVERAGE_MULTIPLIER = "COVERAGE_MULTIPLIER";
-	private static final String PROP_NEW_CLASSIFIER_OVERRULING = "NEW_CLASSIFIER_OVERRULING";
+	public static final String NEXT_TOKEN_RELATION = "relation";
+	public static final String TOKEN_NODE_TYPE = "token";
+	public static final String SRL_ARC_TYPE = "srl";
 
 	private List<INode> utteranceNodes;
-	private BinaryNeuralClassifier binClf;
-	private MulticlassNeuralClassifier mclassClf;
 	private boolean useContext = true;
-
-	private boolean useToBeVerbModifier = false;
-	private boolean usePermutations = false;
-	private boolean alsoMatchUnlemmatized = false;
-	private boolean considerCoverage = false;
-	private boolean newOverruling = false;
-
-	private double coverageMultiplier;
 
 	/*
 	 * (non-Javadoc)
@@ -94,27 +81,18 @@ public class MethodSynthesizer extends AbstractAgent {
 	 */
 	@Override
 	public void init() {
+		logger.info("************* Start init of Method Synthesizer Agent. *************");
 		setId(ID);
-		System.out.println(" ");
-		logger.info("************* Start execution of Methodsynthesizer Agent. *************");
+		logger.info("************ Finished init of Method Synthesizer Agent. ************");
 
-		new GraphUtils(graph);
-		utteranceNodes = new ArrayList<>();
-		try {
-			utteranceNodes = GraphUtils.getNodesOfUtterance();
-		} catch (MissingDataException e) {
-			e.printStackTrace();
-			logger.error("No valid ParseGraph. Abort Agent execution.", e);
-		}
-
-		binClf = new BinaryNeuralClassifier(props);
-		mclassClf = new MulticlassNeuralClassifier(props);
-		useToBeVerbModifier = Boolean.parseBoolean(props.getProperty(PROP_TO_BE_VERB_MODIFIER));
-		usePermutations = Boolean.parseBoolean(props.getProperty(PROP_USE_PERMUTATIONS));
-		alsoMatchUnlemmatized = Boolean.parseBoolean(props.getProperty(PROP_MATCH_UNLEMMATIZED));
-		considerCoverage = Boolean.parseBoolean(props.getProperty(PROP_CONSIDER_COVERAGE));
-		coverageMultiplier = Double.parseDouble(props.getProperty(PROP_COVERAGE_MULTIPLIER));
-		newOverruling = Boolean.parseBoolean(props.getProperty(PROP_NEW_CLASSIFIER_OVERRULING));
+		//		new GraphUtils(graph);
+		//		utteranceNodes = new ArrayList<>();
+		//		try {
+		//			utteranceNodes = GraphUtils.getNodesOfUtterance();
+		//		} catch (MissingDataException e) {
+		//			e.printStackTrace();
+		//			logger.error("No valid ParseGraph. Abort Agent execution.", e);
+		//		}
 	}
 
 	/*
@@ -125,87 +103,110 @@ public class MethodSynthesizer extends AbstractAgent {
 	@Override
 	public void exec() {
 		// check if graph contains SRL-Labels, if not, exit
-		if (graph.getArcsOfType(graph.getArcType("srl")).isEmpty()) {
+		//TODO: do it more gracefully!
+		//TODO: move to method
+		//TODO: check attributes of teaching detector
+		//		if (graph.getArcsOfType(graph.getArcType("srl")).isEmpty()) {
+		//			try {
+		//				throw new MissingDataException();
+		//			} catch (MissingDataException e) {
+		//				logger.error("No SRL-Annotations found.");
+		//			}
+		//		}
+
+		if (checkMandatory()) {
+
+			// check if graph contains context-Labels for synonyms and corefs
+			if (graph.getArcsOfType(graph.getArcType("reference")).isEmpty()
+					|| graph.getArcsOfType(graph.getArcType("contextRelation")).isEmpty()) {
+				useContext = false;
+				logger.error("No Context-Annotations found. No usage of synonyms and coref resolution for string matching.");
+			}
+
+			//		String utterance = GraphUtils.getUtteranceString(utteranceNodes);
+			//		System.out.println(" ");
+			//		logger.info("input sentence: {}", utterance);
+
+			// binary classification: TeachingSequence yes/no
+			//		float[] binaryPrediction = getBinaryClfIsTeachingSequenceResult(utterance);
+			GraphUtils.setGraph(graph);
+			utteranceNodes = new ArrayList<>();
 			try {
-				throw new MissingDataException();
+				utteranceNodes = GraphUtils.getNodesOfUtterance();
 			} catch (MissingDataException e) {
-				logger.error("No SRL-Annotations found.");
+				logger.error("Something went wrong while reading utterance nodes");
+				e.printStackTrace();
 			}
-		}
+			boolean isTeachingSequence = Boolean.valueOf((String) utteranceNodes.get(0).getAttributeValue(IS_TEACHING_SEQUENCE));
+			float binaryPrediction = (float) utteranceNodes.get(0).getAttributeValue(IS_TEACHING_SEQUENCE_PROB);
 
-		// check if graph contains context-Labels for synonyms and corefs
-		if (graph.getArcsOfType(graph.getArcType("reference")).isEmpty()
-				|| graph.getArcsOfType(graph.getArcType("contextRelation")).isEmpty()) {
-			useContext = false;
-			logger.error("No Context-Annotations found. No usage of synonyms and coref resolution for string matching.");
-		}
+			// mclass classification: methodbody/methodhead
+			List<MulticlassLabels> mclassLabels = null;
 
-		String utterance = GraphUtils.getUtteranceString(utteranceNodes);
-		System.out.println(" ");
-		logger.info("input sentence: {}", utterance);
+			try {
+				mclassLabels = getMclassClfTeachingSequencePartsResult(utteranceNodes);
+			} catch (IllegalArgumentException e) {
+				logger.error(e.getMessage());
+			}
+			//		saveToGraph(isTeachingSequence, binaryPrediction, mclassLabels);
 
-		// binary classification: TeachingSequence yes/no
-		float[] binaryPrediction = getBinaryClfIsTeachingSequenceResult(utterance);
-		boolean isTeachingSequence = binClf.isTeachingSequence(binaryPrediction);
-
-		// mclass classification: methodbody/methodhead
-		List<MulticlassLabels> mclassLabels = getMclassClfTeachingSequencePartsResult(utterance);
-
-		saveToGraph(isTeachingSequence, binaryPrediction, mclassLabels);
-
-		long declarationLabels = mclassLabels.stream().filter(l -> l.equals(MulticlassLabels.DECL)).count();
-
-		if (newOverruling) {
-			if (!isTeachingSequence && ((binaryPrediction[0] > 0.1f && declarationLabels > 2) || declarationLabels > 5)) {
+			long declarationLabels = mclassLabels.stream().filter(l -> l.equals(MulticlassLabels.DECL)).count();
+			if (!isTeachingSequence && ((binaryPrediction > 0.1f && declarationLabels > 2) || declarationLabels > 5)) {
 				isTeachingSequence = true;
 				logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier "
 						+ "contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
 			}
+
+			// merge classification results with semantic role labels: methodname, params
+			SrlExtractor srl = new SrlExtractor();
+			AbstractCommand command = mergeClfResults(srl, isTeachingSequence, mclassLabels);
+
+			OntologyMapper mapper = new OntologyMapper(useContext);
+			CommandCandidate commandMappingToAPI = mapper.findCommandMappingToAPI(command);
+			logger.debug("Mapped command: \n{}", commandMappingToAPI.toString());
+
+			saveToGraph(commandMappingToAPI);
+		}
+	}
+
+	private boolean checkMandatory() {
+
+		if (!(graph instanceof ParseGraph)) {
+			logger.error("Graph is not an instance of ParseGraph, aborting!");
+			return false;
+		} else if (!graph.hasArcType(NEXT_TOKEN_RELATION) || !graph.hasNodeType(TOKEN_NODE_TYPE)
+				|| graph.getNodesOfType(graph.getNodeType(TOKEN_NODE_TYPE)).isEmpty()) {
+			logger.info("Graph has no utterance nodes or next edges, aborting!");
+			return false;
+		} else if (!graph.hasArcType(SRL_ARC_TYPE) || graph.getArcsOfType(graph.getArcType(SRL_ARC_TYPE)).isEmpty()) {
+			logger.info("No SRL-Annotations found, aborting!");
+			return false;
+		} else if (!graph.getNodeType(TOKEN_NODE_TYPE).containsAttribute(IS_TEACHING_SEQUENCE, "String")
+				|| !graph.getNodeType(TOKEN_NODE_TYPE).containsAttribute(IS_TEACHING_SEQUENCE_PROB, "float")
+				|| !graph.getNodeType(TOKEN_NODE_TYPE).containsAttribute(TEACHING_SEQUENCE_PART, "String")) {
+			logger.info("No teaching detector information so far, waiting for next iteration");
+			return false;
 		} else {
-			if (!isTeachingSequence && ((binaryPrediction[0] > 0.1f) || (binaryPrediction[0] > 0.01f && declarationLabels > 0))) {
-				isTeachingSequence = true;
-				logger.info("Binary classifier detected no teaching sequence (<0.5) BUT multiclass classifier "
-						+ "contains {} declaration labels -> interpreting as Teaching Command.", declarationLabels);
+			return true;
+		}
+	}
+
+	//	private float[] getBinaryClfIsTeachingSequenceResult(String utterance) {
+	//		// TODO: implement me!
+	//		return null;
+	//	}
+
+	protected List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(List<INode> utteranceNodes) throws IllegalArgumentException {
+		List<MulticlassLabels> resultList = new ArrayList<>();
+		for (INode node : utteranceNodes) {
+			String labelString = (String) node.getAttributeValue(TEACHING_SEQUENCE_PART);
+			if (labelString.equals("DECL") || labelString.equals("DESC") || labelString.equals("ELSE")) {
+				resultList.add(MulticlassLabels.valueOf(labelString));
+			} else {
+				throw new IllegalArgumentException("Unexpected multi class label: " + labelString);
 			}
 		}
-
-		// merge classification results with semantic role labels: methodname, params
-		SrlExtractor srl = new SrlExtractor(useToBeVerbModifier);
-		AbstractCommand command = mergeClfResults(srl, isTeachingSequence, mclassLabels);
-
-		OntologyMapper mapper = new OntologyMapper(useContext, usePermutations, alsoMatchUnlemmatized, considerCoverage,
-				coverageMultiplier);
-		CommandCandidate commandMappingToAPI = mapper.findCommandMappingToAPI(command);
-		logger.debug("Mapped command: \n{}", commandMappingToAPI.toString());
-
-		saveToGraph(commandMappingToAPI);
-	}
-
-	private float[] getBinaryClfIsTeachingSequenceResult(String utterance) {
-		INDArray binResult = binClf.getSinglePrediction(utterance, binClf.getModel());
-		float[] predictedClasses = binClf.getPredictedClasses(binResult, 0);
-
-		logger.info("Found teaching sequence prediction: {}.", predictedClasses);
-		return predictedClasses;
-	}
-
-	protected List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(String utterance) {
-		List<MulticlassLabels> mclassLabels;
-		boolean useInternalModel = Boolean.valueOf(props.getProperty("USE_INTERAL_MCLASS_MODEL"));
-		logger.info("Read in configuration for USE_INTERAL_MCLASS_MODEL:{}.", useInternalModel);
-
-		if (useInternalModel) { // load model from dl4j
-			INDArray mclassPrediction = mclassClf.getSinglePrediction(utterance, mclassClf.getModel());
-			mclassLabels = mclassClf.getInterpretedPredictedLabels(mclassPrediction, utteranceNodes.size());
-
-		} else { // use keras external MclassModel by calling python script
-			INDArray mclassPrediction = mclassClf.getExternalMclassModelSinglePrediction(mclassClf.tokenizeSingleInput(utterance),
-					utteranceNodes.size());
-			mclassLabels = mclassClf.getInterpretedPredictedLabels(mclassPrediction, utteranceNodes.size());
-		}
-
-		logger.info("Found different parts of teaching sequence with multiclass clf.");
-		return mclassLabels;
+		return resultList;
 	}
 
 	private AbstractCommand mergeClfResults(SrlExtractor srl, boolean isTeachingSequence, List<MulticlassLabels> mclassLabels) {
@@ -222,27 +223,27 @@ public class MethodSynthesizer extends AbstractAgent {
 		return command;
 	}
 
-	private void saveToGraph(boolean binaryIsTeachingSequence, float[] isTeachingSequenceProbability, List<MulticlassLabels> mclassLabels) {
-		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE, "String")) {
-			graph.getNodeType("token").addAttributeToType("String", IS_TEACHING_SEQUENCE);
-		}
-
-		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE_PROB, "float")) {
-			graph.getNodeType("token").addAttributeToType("float", IS_TEACHING_SEQUENCE_PROB);
-		}
-
-		if (!graph.getNodeType("token").containsAttribute(TEACHING_SEQUENCE_PART, "String")) {
-			graph.getNodeType("token").addAttributeToType("String", TEACHING_SEQUENCE_PART);
-		}
-
-		for (int i = 0; i < utteranceNodes.size(); i++) {
-			INode currentNode = utteranceNodes.get(i);
-			currentNode.setAttributeValue(IS_TEACHING_SEQUENCE, binaryIsTeachingSequence);
-			// first index of float-Array equals probability for binary-TeachingSequence-class
-			currentNode.setAttributeValue(IS_TEACHING_SEQUENCE_PROB, isTeachingSequenceProbability[0]);
-			currentNode.setAttributeValue(TEACHING_SEQUENCE_PART, mclassLabels.get(i));
-		}
-	}
+	//	private void saveToGraph(boolean binaryIsTeachingSequence, float[] isTeachingSequenceProbability, List<MulticlassLabels> mclassLabels) {
+	//		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE, "String")) {
+	//			graph.getNodeType("token").addAttributeToType("String", IS_TEACHING_SEQUENCE);
+	//		}
+	//
+	//		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE_PROB, "float")) {
+	//			graph.getNodeType("token").addAttributeToType("float", IS_TEACHING_SEQUENCE_PROB);
+	//		}
+	//
+	//		if (!graph.getNodeType("token").containsAttribute(TEACHING_SEQUENCE_PART, "String")) {
+	//			graph.getNodeType("token").addAttributeToType("String", TEACHING_SEQUENCE_PART);
+	//		}
+	//
+	//		for (int i = 0; i < utteranceNodes.size(); i++) {
+	//			INode currentNode = utteranceNodes.get(i);
+	//			currentNode.setAttributeValue(IS_TEACHING_SEQUENCE, binaryIsTeachingSequence);
+	//			// first index of float-Array equals probability for binary-TeachingSequence-class
+	//			currentNode.setAttributeValue(IS_TEACHING_SEQUENCE_PROB, isTeachingSequenceProbability[0]);
+	//			currentNode.setAttributeValue(TEACHING_SEQUENCE_PART, mclassLabels.get(i));
+	//		}
+	//	}
 
 	private void saveToGraph(CommandCandidate commandMapping) {
 		MethodSignatureCandidate methodSignature = commandMapping.getMethodSignature();

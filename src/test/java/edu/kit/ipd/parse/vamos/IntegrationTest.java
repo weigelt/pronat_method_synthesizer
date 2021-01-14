@@ -5,19 +5,21 @@ import edu.kit.ipd.parse.corefanalyzer.CorefAnalyzer;
 import edu.kit.ipd.parse.graphBuilder.GraphBuilder;
 import edu.kit.ipd.parse.luna.data.MissingDataException;
 import edu.kit.ipd.parse.luna.data.PrePipelineData;
+import edu.kit.ipd.parse.luna.graph.INode;
+import edu.kit.ipd.parse.luna.graph.Pair;
 import edu.kit.ipd.parse.luna.pipeline.PipelineStageException;
 import edu.kit.ipd.parse.luna.tools.StringToHypothesis;
 import edu.kit.ipd.parse.ner.NERTagger;
 import edu.kit.ipd.parse.shallownlp.ShallowNLP;
 import edu.kit.ipd.parse.srlabeler.SRLabeler;
 import edu.kit.ipd.parse.vamos.command_classification.MulticlassLabels;
-import edu.kit.ipd.parse.luna.graph.Pair;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.nd4j.linalg.io.ClassPathResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -186,7 +188,8 @@ public class IntegrationTest {
 			private final Logger logger = LoggerFactory.getLogger(MethodSynthesizer.class);
 
 			@Override
-			public List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(String input) {
+			public List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(List<INode> utteranceNodes)
+					throws IllegalArgumentException {
 				logger.debug("Predict with {}", getClass());
 				logger.debug("Got prediction: {}", mockMclassPrediction);
 				return mockMclassPrediction;

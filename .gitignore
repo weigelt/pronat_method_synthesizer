@@ -1,8 +1,34 @@
+### other agent repos ###
+CommandOntologyMapper/
+TeachingCommandClassifier/
+notInGithub
+
+### resources ###
+pretrained_fasttext/
 *.bak
+bert_untrained/
+MethodSynthesizer_venv/
+artifacts/
+logs/
+error.txt
+output.txt
+
+### JupyterNotebook ###
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+/.ipynb_checkpoints
+
+# Remove previous ipynb_checkpoints
+ git rm -r .ipynb_checkpoints/
+
+## svgs from studies
+Nutzerstudie_Vorstudie/googleForms/svg/
+Nutzerstudie_Evaluation/svg/
 
 # SVN
 .svn
 repo/
+
 
 # VIM locks
 *.swp
@@ -20,12 +46,20 @@ repo/
 #
 # # Excel Backup File
 *.xlk
+#
+# PowerPoint temporary
+~$*.ppt*
+
+# Protegé catalog files
+*catalog*.xml
 
 # LaTex
+Abschlussvortrag.pdf
 *.acn
 *.acr
 *.alg
 *.aux
+*-blx.bib
 *.bbl
 *.blg
 *.brf
@@ -46,12 +80,16 @@ repo/
 *.maf
 *.mtc
 *.mtc1
+*.nav
 *.out
-*.pdf
+thesis.pdf
 *.ps
+*.run.xml
+*.snm
 *.synctex.gz
 *.tdo
 *.toc
+*.synctex
 
 # Elcipse
 .classpath
@@ -59,8 +97,15 @@ repo/
 .settings
 target/
 
+#intellij
+.idea/
+*.iml
+
 # Mac
 .DS_Store
+
+# Windows
+Thumbs.db
 
 # dotNet
 obj/
@@ -72,13 +117,3 @@ _ReSharper.*
 *.resharper
 *.suo
 *.cache
-
-# IntelliJ IDE
-.idea/*
-*.iws
-*.iml
-*.eml
-/out/
-*error.txt
-*output.txt
-*_venv

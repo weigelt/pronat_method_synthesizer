@@ -3,24 +3,53 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>edu.kit.ipd.parse</groupId>
-    <artifactId>VaMoS</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
-
     <parent>
-        <groupId>edu.kit.ipd.parse</groupId>
         <artifactId>parse</artifactId>
-        <version>0.0.4</version>
+        <groupId>edu.kit.ipd.parse</groupId>
+        <version>0.0.5-SNAPSHOT</version>
     </parent>
+    <artifactId>VaMoS</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <repositories>
         <repository>
             <id>ipdNexus-public-releases</id>
             <name>IPD-Repository</name>
-            <url>http://bob.ipd.kit.edu/nexus/repository/maven-public-releases</url>
+            <url>http://bob.ipd.kit.edu/nexus/repository/maven-public-releases/</url>
         </repository>
     </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>${parse_bundle.directory}/plugins</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${parse_bundle.directory}/plugins/libs
+                            </outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -54,95 +83,84 @@
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>senna-wrapper</artifactId>
+            <artifactId>ShallowNLP</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>SRLabeler</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>ner</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>ShallowNLP</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>coref</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>graphBuilder</artifactId>
+            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>me.xdrop</groupId>
-            <artifactId>fuzzywuzzy</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-core</artifactId>
-            <!--<version>1.0.0-SNAPSHOT</version>-->
-            <!--<version>1.0.0-beta2</version>-->
-            <version>1.0.0-beta3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-modelimport</artifactId>
-            <!--<version>1.0.0-SNAPSHOT</version>-->
-            <!--<version>1.0.0-beta2</version>-->
-            <version>1.0.0-beta3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native-platform</artifactId>
-            <!--<version>1.0.0-SNAPSHOT</version>-->
-            <!--<version>1.0.0-beta2</version>-->
-            <version>1.0.0-beta3</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>edu.kit.ipd.parse</groupId>-->
+        <!--            <artifactId>graphBuilder</artifactId>-->
+        <!--        </dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>edu.kit.ipd.parse</groupId>-->
+        <!--<artifactId>ontology_connection</artifactId>-->
+        <!--<version>0.0.2-SNAPSHOT</version>-->
+        <!--</dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>me.xdrop</groupId>-->
+        <!--            <artifactId>fuzzywuzzy</artifactId>-->
+        <!--            <version>1.2.0</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>ontology_connection</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>9.4.9.v20180320</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.cloud.dataflow</groupId>
-            <artifactId>google-cloud-dataflow-java-sdk-all</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tensorflow</groupId>
-            <artifactId>tensorflow</artifactId>
-            <version>1.12.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>edu.kit.ipd.parse</groupId>-->
-        <!--<artifactId>ontology_connection</artifactId>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
+        <!--        <dependency>-->
+        <!--            <groupId>me.xdrop</groupId>-->
+        <!--            <artifactId>fuzzywuzzy</artifactId>-->
+        <!--            <version>1.2.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.eclipse.jetty</groupId>-->
+        <!--            <artifactId>jetty-server</artifactId>-->
+        <!--            <version>9.4.9.v20180320</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.cloud.dataflow</groupId>-->
+        <!--            <artifactId>google-cloud-dataflow-java-sdk-all</artifactId>-->
+        <!--            <version>2.2.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.tensorflow</groupId>-->
+        <!--            <artifactId>tensorflow</artifactId>-->
+        <!--            <version>1.12.0</version>-->
+        <!--        </dependency>-->
     </dependencies>
 
-    <build>
-        <resources>
-            <!-- regular resource processsing for everything  -->
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-    </build>
+    <properties>
+        <parse_bundle.directory>../parse_bundle</parse_bundle.directory>
+    </properties>
+
+    <!--    <build>-->
+    <!--        <resources>-->
+    <!--            &lt;!&ndash; regular resource processsing for everything  &ndash;&gt;-->
+    <!--            <resource>-->
+    <!--                <directory>src/main/resources</directory>-->
+    <!--            </resource>-->
+    <!--        </resources>-->
+    <!--    </build>-->
 </project>

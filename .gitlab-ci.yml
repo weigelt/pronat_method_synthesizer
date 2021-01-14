@@ -1,6 +1,6 @@
 master:
     script:
-        - mvn clean source:jar deploy -U -B
+        - mvn source:jar deploy -B -U -DforkCount=0
     tags:
         - mvn
     only:
@@ -8,7 +8,7 @@ master:
 
 branches:
     script:
-        - mvn test -B
+        - mvn test -B -DforkCount=0
     tags:
         - mvn
     only:
