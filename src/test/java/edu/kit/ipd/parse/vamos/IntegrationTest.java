@@ -15,7 +15,6 @@ import edu.kit.ipd.parse.srlabeler.SRLabeler;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.nd4j.linalg.io.ClassPathResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -123,8 +122,10 @@ public class IntegrationTest {
 			System.setProperty("logfile.name", index + ".log");
 
 			ClassLoader classLoader = getClass().getClassLoader();
-			ClassPathResource logResource = new ClassPathResource("log4j.properties", classLoader);
-			PropertyConfigurator.configure(logResource.getFile().getAbsolutePath());
+
+			//TODO: do I need that?
+			//			ClassPathResource logResource = new ClassPathResource("log4j.properties", classLoader);
+			//			PropertyConfigurator.configure(logResource.getFile().getAbsolutePath());
 
 			runMethodSynthesizer(input);
 		}
