@@ -71,6 +71,10 @@ public class MethodSynthesizer extends AbstractAgent {
 	private List<INode> utteranceNodes;
 	private boolean useContext = true;
 
+	public MethodSynthesizer() {
+		setId(ID);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -78,9 +82,9 @@ public class MethodSynthesizer extends AbstractAgent {
 	 */
 	@Override
 	public void init() {
-		logger.info("************* Start init of Method Synthesizer Agent. *************");
-		setId(ID);
-		logger.info("************ Finished init of Method Synthesizer Agent. ************");
+		//		logger.info("************* Start init of Method Synthesizer Agent. *************");
+		//		setId(ID);
+		//		logger.info("************ Finished init of Method Synthesizer Agent. ************");
 	}
 
 	/*
