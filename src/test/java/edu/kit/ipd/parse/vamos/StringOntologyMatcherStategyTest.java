@@ -88,7 +88,7 @@ public class StringOntologyMatcherStategyTest {
 
 		MyFuzzy(float threshold) {
 			super(threshold);
-        fs = new FuzzyScore(Locale.ENGLISH);
+			fs = new FuzzyScore(Locale.ENGLISH);
 		}
 
 		@Override
@@ -270,7 +270,6 @@ public class StringOntologyMatcherStategyTest {
 			System.out.println("obj name: " + s.getName());
 			System.out.println("obj class: " + s.getClass());
 			System.out.println("obj types: " + Arrays.toString(s.getTypes().toArray()));
-
 			System.out.println(domain.getTypedObjects().getTypes());
 
 			IObject typedObject = domain.getTypedObjects().getMemberByNameAndType(s.getName(), ontologyParamToMap.getDataType().getName());
@@ -353,11 +352,11 @@ public class StringOntologyMatcherStategyTest {
 				// return averaged score with overlapping strategies
 				double avgScore = (jw.get(overlap) + fs.get(overlap)) / 2.0;
 				if (avgScore > 0.4) {
-            overlaps.add(new ImmutablePair<>(avgScore, overlap));
-        }
+					overlaps.add(new ImmutablePair<>(avgScore, overlap));
+				}
 				if (avgScore <= 0.4) {
-            System.out.println("DROP OVERLAP MATCH " + overlap.getName() + " with avgscore " + avgScore);
-        }
+					System.out.println("DROP OVERLAP MATCH " + overlap.getName() + " with avgscore " + avgScore);
+				}
 			}
 		}
 
