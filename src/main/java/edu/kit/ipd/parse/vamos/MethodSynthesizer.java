@@ -15,7 +15,6 @@ import edu.kit.ipd.parse.vamos.programm_representation.FunctionParameterCandidat
 import edu.kit.ipd.parse.vamos.programm_representation.MethodSignatureCandidate;
 import edu.kit.ipd.parse.vamos.utils.GraphUtils;
 import org.kohsuke.MetaInfServices;
-import org.nd4j.linalg.api.ndarray.INDArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,15 +81,6 @@ public class MethodSynthesizer extends AbstractAgent {
 		logger.info("************* Start init of Method Synthesizer Agent. *************");
 		setId(ID);
 		logger.info("************ Finished init of Method Synthesizer Agent. ************");
-
-		//		new GraphUtils(graph);
-		//		utteranceNodes = new ArrayList<>();
-		//		try {
-		//			utteranceNodes = GraphUtils.getNodesOfUtterance();
-		//		} catch (MissingDataException e) {
-		//			e.printStackTrace();
-		//			logger.error("No valid ParseGraph. Abort Agent execution.", e);
-		//		}
 	}
 
 	/*
@@ -100,17 +90,6 @@ public class MethodSynthesizer extends AbstractAgent {
 	 */
 	@Override
 	public void exec() {
-		// check if graph contains SRL-Labels, if not, exit
-		//TODO: do it more gracefully!
-		//TODO: move to method
-		//TODO: check attributes of teaching detector
-		//		if (graph.getArcsOfType(graph.getArcType("srl")).isEmpty()) {
-		//			try {
-		//				throw new MissingDataException();
-		//			} catch (MissingDataException e) {
-		//				logger.error("No SRL-Annotations found.");
-		//			}
-		//		}
 
 		if (checkMandatory()) {
 
@@ -121,12 +100,6 @@ public class MethodSynthesizer extends AbstractAgent {
 				logger.error("No Context-Annotations found. No usage of synonyms and coref resolution for string matching.");
 			}
 
-			//		String utterance = GraphUtils.getUtteranceString(utteranceNodes);
-			//		System.out.println(" ");
-			//		logger.info("input sentence: {}", utterance);
-
-			// binary classification: TeachingSequence yes/no
-			//		float[] binaryPrediction = getBinaryClfIsTeachingSequenceResult(utterance);
 			GraphUtils.setGraph(graph);
 			utteranceNodes = new ArrayList<>();
 			try {
@@ -189,11 +162,6 @@ public class MethodSynthesizer extends AbstractAgent {
 		}
 	}
 
-	//	private float[] getBinaryClfIsTeachingSequenceResult(String utterance) {
-	//		// TODO: implement me!
-	//		return null;
-	//	}
-
 	protected List<MulticlassLabels> getMclassClfTeachingSequencePartsResult(List<INode> utteranceNodes) throws IllegalArgumentException {
 		List<MulticlassLabels> resultList = new ArrayList<>();
 		for (INode node : utteranceNodes) {
@@ -220,28 +188,6 @@ public class MethodSynthesizer extends AbstractAgent {
 		logger.debug(command.toString());
 		return command;
 	}
-
-	//	private void saveToGraph(boolean binaryIsTeachingSequence, float[] isTeachingSequenceProbability, List<MulticlassLabels> mclassLabels) {
-	//		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE, "String")) {
-	//			graph.getNodeType("token").addAttributeToType("String", IS_TEACHING_SEQUENCE);
-	//		}
-	//
-	//		if (!graph.getNodeType("token").containsAttribute(IS_TEACHING_SEQUENCE_PROB, "float")) {
-	//			graph.getNodeType("token").addAttributeToType("float", IS_TEACHING_SEQUENCE_PROB);
-	//		}
-	//
-	//		if (!graph.getNodeType("token").containsAttribute(TEACHING_SEQUENCE_PART, "String")) {
-	//			graph.getNodeType("token").addAttributeToType("String", TEACHING_SEQUENCE_PART);
-	//		}
-	//
-	//		for (int i = 0; i < utteranceNodes.size(); i++) {
-	//			INode currentNode = utteranceNodes.get(i);
-	//			currentNode.setAttributeValue(IS_TEACHING_SEQUENCE, binaryIsTeachingSequence);
-	//			// first index of float-Array equals probability for binary-TeachingSequence-class
-	//			currentNode.setAttributeValue(IS_TEACHING_SEQUENCE_PROB, isTeachingSequenceProbability[0]);
-	//			currentNode.setAttributeValue(TEACHING_SEQUENCE_PART, mclassLabels.get(i));
-	//		}
-	//	}
 
 	private void saveToGraph(CommandCandidate commandMapping) {
 		MethodSignatureCandidate methodSignature = commandMapping.getMethodSignature();
