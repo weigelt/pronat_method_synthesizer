@@ -112,6 +112,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>edu.kit.ipd.parse</groupId>
+            <artifactId>teaching_detector</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>me.xdrop</groupId>
             <artifactId>fuzzywuzzy</artifactId>
             <version>1.2.0</version>
