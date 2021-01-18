@@ -95,7 +95,8 @@ public class MethodSynthesizer extends AbstractAgent {
 	@Override
 	public void exec() {
 
-		if (checkMandatory()) {
+		//TODO: what to do, if ran before? By now, just exit...
+		if (checkMandatory() && !checkRunBefore()) {
 
 			// check if graph contains context-Labels for synonyms and corefs
 			if (graph.getArcsOfType(graph.getArcType("reference")).isEmpty()
@@ -141,6 +142,15 @@ public class MethodSynthesizer extends AbstractAgent {
 			logger.debug("Mapped command: \n{}", commandMappingToAPI.toString());
 
 			saveToGraph(commandMappingToAPI);
+		}
+	}
+
+	private boolean checkRunBefore() {
+		if (graph.hasNodeType(NODE_TYPE_COMMAND_MAPPER)) {
+			logger.info("Executed before, aborting!");
+			return true;
+		} else {
+			return false;
 		}
 	}
 
