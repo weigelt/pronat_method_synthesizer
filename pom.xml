@@ -9,7 +9,7 @@
         <version>0.0.5-SNAPSHOT</version>
     </parent>
     <artifactId>VaMoS</artifactId>
-    <version>0.0.1-eval-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <repositories>
         <repository>
