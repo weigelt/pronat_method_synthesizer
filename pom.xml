@@ -4,13 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>parse</artifactId>
-        <groupId>edu.kit.ipd.parse</groupId>
-        <version>0.0.5-SNAPSHOT</version>
+        <groupId>edu.kit.ipd.pronat</groupId>
+        <artifactId>pronat</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>VaMoS</artifactId>
+    <artifactId>method_synthesizer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
+    <name>Method Synthesizer</name>
+    <description>
+        ProNat Agent that synthesizes methods, aka VAMoS (Vanessa's Awesome Method Synthesizer)
+    </description>
     <repositories>
         <repository>
             <id>ipdNexus-public-releases</id>
@@ -24,7 +27,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <outputDirectory>${parse_bundle.directory}/plugins</outputDirectory>
+                    <outputDirectory>${pronat_bundle.directory}/plugins</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -38,7 +41,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${parse_bundle.directory}/plugins/libs
+                            <outputDirectory>${pronat_bundle.directory}/plugins/libs
                             </outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
@@ -82,37 +85,42 @@
             <artifactId>metainf-services</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>ShallowNLP</artifactId>
+            <groupId>edu.kit.ipd.pronat</groupId>
+            <artifactId>pre_pipeline_data_model</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>SRLabeler</artifactId>
+            <groupId>edu.kit.ipd.pronat</groupId>
+            <artifactId>shallow_nlp</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
+            <groupId>edu.kit.ipd.pronat</groupId>
+            <artifactId>srl</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>edu.kit.ipd.pronat</groupId>
             <artifactId>ner</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
+            <groupId>edu.kit.ipd.pronat</groupId>
             <artifactId>context</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
+            <groupId>edu.kit.ipd.pronat</groupId>
             <artifactId>coref</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
-            <artifactId>graphBuilder</artifactId>
+            <groupId>edu.kit.ipd.pronat</groupId>
+            <artifactId>graph_builder</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>edu.kit.ipd.parse</groupId>
+            <groupId>edu.kit.ipd.pronat</groupId>
             <artifactId>teaching_detector</artifactId>
             <scope>test</scope>
         </dependency>
@@ -126,34 +134,8 @@
             <groupId>edu.kit.ipd.parse</groupId>
             <artifactId>ontology_connection</artifactId>
         </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.eclipse.jetty</groupId>-->
-        <!--            <artifactId>jetty-server</artifactId>-->
-        <!--            <version>9.4.9.v20180320</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.google.cloud.dataflow</groupId>-->
-        <!--            <artifactId>google-cloud-dataflow-java-sdk-all</artifactId>-->
-        <!--            <version>2.2.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.tensorflow</groupId>-->
-        <!--            <artifactId>tensorflow</artifactId>-->
-        <!--            <version>1.12.0</version>-->
-        <!--        </dependency>-->
     </dependencies>
-
     <properties>
-        <parse_bundle.directory>../parse_bundle</parse_bundle.directory>
+        <pronat_bundle.directory>../pronat_bundle</pronat_bundle.directory>
     </properties>
-
-    <!--    <build>-->
-    <!--        <resources>-->
-    <!--            &lt;!&ndash; regular resource processsing for everything  &ndash;&gt;-->
-    <!--            <resource>-->
-    <!--                <directory>src/main/resources</directory>-->
-    <!--            </resource>-->
-    <!--        </resources>-->
-    <!--    </build>-->
 </project>
