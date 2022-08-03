@@ -14,13 +14,6 @@
     <description>
         ProNat Agent that synthesizes methods, aka VAMoS (Vanessa's Awesome Method Synthesizer)
     </description>
-    <repositories>
-        <repository>
-            <id>ipdNexus-public-releases</id>
-            <name>IPD-Repository</name>
-            <url>http://bob.ipd.kit.edu/nexus/repository/maven-public-releases/</url>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>
